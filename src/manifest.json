@@ -1,0 +1,13 @@
+{
+    "name": "Portal Data & Analytics",
+    "background-color": "#1A2657",
+    "display": "standalone",
+    "orientation": "portrait",
+    "Scope":"",
+    "start_url": "",
+    "icons (ícones que vão ser utilizados na tela inicial do seu celular)": [{
+        "src": "src/_assets/nature.svg",
+        "sizes": "72x72",
+        "type": "image/svg"
+    }]
+}
