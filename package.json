@@ -22,7 +22,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
-  "scripts": {    
+  "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production"
   },
