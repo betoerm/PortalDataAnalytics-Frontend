@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
