@@ -1,45 +1,100 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, CardDeck, Jumbotron} from 'react-bootstrap';
+import { CardDeck } from 'react-bootstrap';
+import FilterResults from 'react-filter-search';
 
 import {  toolActions } from '../_actions';
 import  ToolItem from "../_components/ToolItem";
 import NavComponent from '../_components/NavComponent';
+import { toolService } from '../_services';
+ 
+class HomePage extends React.Component { 
+    constructor(props){
+        super(props);
 
-import { Card } from 'react-bootstrap';
+        this.handleChange = this.handleChange.bind(this);
 
+        this.state = { 
+            data: [],       
+            value: '',
+            _isMounted: false   
+        }       
+    }    
 
-class HomePage extends React.Component {    
-
-    componentDidMount() {
-        this.props.getAll();        
+    componentDidMount() {        
+        this.setState({_isMounted: true});    
+                
+        if (this.state)            
+           //this.props.getAll();        
+           toolService.getAll().then(
+            result => { this.setState({data: result}) }
+        )    
     } 
 
+    componentWillUnmount() {
+        this.setState({_isMounted: false});   
+    }   
+
+    handleChange(e) {              
+        this.setState({
+            value: e.target.value         
+        })
+      };      
+
     render() {
-        const { user, tools } = this.props;                    
+        //const { user, tools } = this.props;          
+        //const user = this.props;          
+        const { data, value }  = this.state;
+        
         return (
-            <div> 
+            <div>               
                 <NavComponent/>
-                <div className="container-fluid" style = {{paddingTop: '5rem'}}>
-                    <div className="row">
-                        {tools.loading && <em>Carregando catálogo...</em>}
-                        {tools.error && <span className="text-danger">ERRO: {tools.error}</span>}              
-                        {tools.items && 
+                <div className="container" style={{color: '#14145a'}}>
+                    <div className="row"> 
+                        <div className="col-sm">
+                            <h1 className="display-4"> Catálogo</h1>                       
+                            <p className="display-5">Encontre produtos e serviços.</p>
+                        </div>
+
+                        <div className="col-sm"> 
+                            <form className="form-inline">
+                                <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                                    value = {value} onChange={ this.handleChange}                                
+                                />                              
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <hr className="border-bottom shadow-sm"/>       
+                    
+                <div className="row">
+                {data.loading && <em>Carregando catálogo...</em>}
+                {data.error && <span className="text-danger">ERRO: {data.error}</span>}         
+                <FilterResults                        
+                        value={value}
+                        data={data}
+                        renderResults={results => (
+                            <div>
                             <ul  style={{listStyleType:"none"}}  >
                                 <CardDeck>
-                                    { tools.items.map((tool, index) => (
-                                        <li key = {tool.id} style={{padding: '5px'}}>
-                                            <ToolItem tool = { tool }/>
+                                    {results.map(el => (
+                                    <div>
+                                        <li key = {el.id} style={{padding: "6px"}}>
+                                            <ToolItem tool = { el }/>
                                         </li>
+                                    </div>
                                     ))}
                                 </CardDeck>
-                            </ul>                         
-                        }          
-                    </div>   
+                            </ul>
+                            </div>
+                        )}
+                />                          
+                </div>               
                 </div>               
             </div>
         );
+        
     }
 }
 

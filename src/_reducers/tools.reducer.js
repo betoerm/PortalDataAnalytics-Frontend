@@ -27,7 +27,7 @@ export function tools(state = {}, action){
             };
         case toolConstants.UPDATE_SUCCESS:
             return{
-                items: action.tools
+                //items: action.tools
             };
         case toolConstants.UPDATE_FAILURE:
             return { ...tool, deleteError: action.error };

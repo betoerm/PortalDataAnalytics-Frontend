@@ -13,7 +13,9 @@ class ToolCreate extends React.Component {
             tool: {
                 title: '',
                 description: '',
-                url: ''
+                provedor: '',
+                type: '',
+                location: '',
             },
             submitted: false
         };
@@ -38,17 +40,15 @@ class ToolCreate extends React.Component {
 
         this.setState({ submitted: true });
         const { tool } = this.state;
-        if (tool.title && tool.description && tool.url) {
+        if (tool.title && tool.description && tool.provedor) {
             this.props.create(tool);
         }
     }
 
     render() {
-        const { creating  } = this.props;
+        const { creating } = this.props;
         const { tool, submitted } = this.state;
-        return (
-            
-
+        return (     
             <div>
                 <NavComponent/>
                 <h2 className="display-4 text-center">Cadastrar</h2>
@@ -56,29 +56,43 @@ class ToolCreate extends React.Component {
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && tool.title ? ' has-error' : '')}>
                         <label htmlFor="title">Título</label>
-                        <input type="text" className="form-control" name="title" value={tool.title} onChange={this.handleChange} />
+                        <input type="text" className="form-control" name="title" value={tool.title} onChange={this.handleChange} required/>
                         {submitted && !tool.title &&
-                            <div className="help-block">Title is required</div>
+                            <div className="help-block">Título é requerido.</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !tool.description ? ' has-error' : '')}>
                         <label htmlFor="description">Descrição</label>
-                        <input type="text" className="form-control" name="description" value={tool.description} onChange={this.handleChange} />
+                        <textarea type="text" className="form-control" name="description" value={tool.description} onChange={this.handleChange} required/>
                         {submitted && !tool.description &&
-                            <div className="help-block">Description is required</div>
+                            <div className="help-block">Descrição é requerida.</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !tool.url ? ' has-error' : '')}>
-                        <label htmlFor="username">URL</label>
-                        <input type="text" className="form-control" name="url" value={tool.url} onChange={this.handleChange} />
-                        {submitted && !tool.url &&
-                            <div className="help-block">URL is required</div>
+                    <div className={'form-group' + (submitted && !tool.provedor ? ' has-error' : '')}>
+                        <label htmlFor="username">Provedor</label>
+                        <input type="text" className="form-control" name="provedor" value={tool.provedor} onChange={this.handleChange} required/>
+                        {submitted && !tool.provedor &&
+                            <div className="help-block">Provedor é requerido.</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !tool.type ? ' has-error' : '')}>
+                        <label htmlFor="username">Tipo</label>
+                        <input type="text" className="form-control" name="type" value={tool.type} onChange={this.handleChange} required/>
+                        {submitted && !tool.type &&
+                            <div className="help-block">Tipo é requerido.</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !tool.location ? ' has-error' : '')}>
+                        <label htmlFor="username">Localização</label>
+                        <input type="text" className="form-control" name="location" value={tool.location} onChange={this.handleChange} required/>
+                        {submitted && !tool.location &&
+                            <div className="help-block">Localização é requerida.</div>
                         }
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-primary">Create</button>
+                        <button className="btn btn-primary">Salvar</button>
                         {creating}
-                        <Link to="/" className="btn btn-link">Cancel</Link>
+                        <Link to="/" className="btn btn-link">Cancelar</Link>
                     </div>
 
                 </form>

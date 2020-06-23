@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
         return (
             <div className="container">                                
                 <form className="form-signin" name="form" onSubmit={this.handleSubmit}>                   
-                    <h2 className="display">Efetuar login no Portal Data & Analytics</h2>
+                    <h1 className="display">Efetuar login no Portal Data & Analytics</h1>
                     <p>Não tem uma conta? <Link to="/register">Registre-se</Link></p>
 
 

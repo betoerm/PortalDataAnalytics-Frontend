@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button} from 'react-bootstrap';
 
 export default ({tool}) => {
     return(                   
-        <div className="col-md-4">
-            <div className="card mb-4 shadow-sm">
+        <div className="col-mb-4">
+            <div className="card sm border-bottom shadow-sm">
                 <div className="card-header" id="header"><strong>{tool.title}</strong></div>
                 <div className="card-body">
                     <p className="card-text">{ tool.description }</p>                    
@@ -30,6 +29,7 @@ export default ({tool}) => {
                         .card{
                             width:18rem;
                             height: 18rem;
+                            box-shadow: 0 12px 15px rgba(140,152,164,.1);                           
                         }                  
                 `}</style> 
         </div>

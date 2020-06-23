@@ -15,13 +15,17 @@ class ToolUpdate extends React.Component {
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeUrl = this.onChangeUrl.bind(this);
+        this.onChangeProvedor = this.onChangeProvedor.bind(this);
+        this.onChangeType = this.onChangeType.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {                
             title: '',
             description: '',
-            url: ''   
+            provedor: '',
+            type: '',
+            location: '',
         }
     }
 
@@ -43,15 +47,26 @@ class ToolUpdate extends React.Component {
             description: e.target.value
         })  
     }
-    onChangeUrl(e) {
+    onChangeProvedor(e) {
         this.setState({
-            url: e.target.value
+            provedor: e.target.value
         })
     }
 
+    onChangeType(e) {
+        this.setState({
+            type: e.target.value
+        })
+    }
+
+    onChangeLocation(e) {
+        this.setState({
+            location: e.target.value
+        })
+    }
     onSubmit(e) {
         e.preventDefault();
-        this.props.update(this.state);        
+        this.props.update(this.state);                
         this.props.history.push(`/tooldetail/${this.state.id}`);
       }
 
@@ -83,26 +98,39 @@ class ToolUpdate extends React.Component {
                         </div>
 
                         <div className="form-group">
-                            <label>Url: </label>
+                            <label>Provedor: </label>
                             <input type="text" 
                                 className="form-control"
-                                value={ item.url }
-                                onChange={this.onChangeUrl}
+                                value={ item.provedor }
+                                onChange={this.onChangeProvedor}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Type: </label>
+                            <input type="text" 
+                                className="form-control"
+                                value={ item.type }
+                                onChange={this.onChangeType}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Localização: </label>
+                            <input type="text" 
+                                className="form-control"
+                                value={ item.location }
+                                onChange={this.onChangeLocation}
                             />
                         </div>
                     
                         <div className="form-group">
-                            <input type="submit" 
-                                value="Atualizar" 
-                                className="btn btn-primary"/>
+                            <button className="btn btn-primary">Atualizar</button>
+                             
+                            <Link to="/" className="btn btn-link">Cancelar</Link>
                         </div>
-                    </form>
-                    <div className="form-group">                                            
-                        <Link to={`/tooldetail/${item.id}`} className="btn btn-link">Cancel</Link>
-                    </div>
-                </div>
-
-                
+                    </form>        
+                </div>                
             </Container>
         );
     }
