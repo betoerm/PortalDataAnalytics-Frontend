@@ -23,8 +23,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open --config webpack.dev.js",    
+    "build": "webpack --config webpack.prod.js"
   },
   "eslintConfig": {
     "extends": "react-app"
