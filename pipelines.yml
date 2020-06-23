@@ -1,11 +1,6 @@
 trigger:
 - master
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-
 jobs:
 - job: Linux      
   pool:
